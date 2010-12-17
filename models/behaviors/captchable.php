@@ -14,13 +14,8 @@ class CaptchableBehavior extends ModelBehavior {
 	}
 
 	function requireCaptcha(&$model, $yes = true) {
-		if ($yes) {
-			$model->validate[$this->field][$this->rule]['required'] = true;
-			$model->validate[$this->field][$this->rule]['allowEmpty'] = false;
-		} else {
-			$model->validate[$this->field][$this->rule]['required'] = false;
-			$model->validate[$this->field][$this->rule]['allowEmpty'] = true;
-		}
+		$model->validate[$this->field][$this->rule]['required'] = $yes;
+		$model->validate[$this->field][$this->rule]['allowEmpty'] = !$yes;
 	}
 
 	function validCaptcha(&$model, $data) {
@@ -30,7 +25,7 @@ class CaptchableBehavior extends ModelBehavior {
 		if (empty($model->{$this->answerProperty})) {
 			return false;
 		}
-		return $check == $model->{$this->answerProperty};
+		return $check === $model->{$this->answerProperty};
 	}
 }
 
