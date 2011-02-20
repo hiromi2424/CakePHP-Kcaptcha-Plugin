@@ -34,15 +34,12 @@ Setup Captcha component to your controller:
 
 Use Captcha helper(automatically set by the component) in your view:
 
-	<?php echo $this->Captcha->render() ?>
+	<?php
+		echo $this->Captcha->render();
+		echo $this->Form->input('captcha');
+	?>
 
 Simply that is all! Your Model will validate user's input for the captcha.
-
-If you want to show the error for captcha, put
-
-	<?php echo $this->Form->error('captcha') ?>
-
-whereever you want to show it.
 
 for more options, you would see the test case.
 
