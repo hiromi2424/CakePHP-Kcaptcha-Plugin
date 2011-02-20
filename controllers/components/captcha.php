@@ -25,14 +25,6 @@ class CaptchaComponent extends Object {
 		}
 	}
 
-	function beforeRender(&$controller) {
-		$this->clearSession();
-	}
-
-	function beforeRedirect(&$controller) {
-		$this->clearSession();
-	}
-
 	function clearSession() {
 		$this->Session->delete($this->sessionKey);
 	}

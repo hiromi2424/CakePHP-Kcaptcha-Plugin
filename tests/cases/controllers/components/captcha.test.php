@@ -10,9 +10,9 @@ class KcaptchaTestController extends Controller {
 	function header() {
 	}
 
-	function redirect($url, $status = null, $exit = false) {
-		parent::redirect($url, $status, $exit);
+	function _stop() {
 	}
+
 }
 
 class KcaptchaTestModel extends CakeTestModel {
@@ -22,6 +22,7 @@ class KcaptchaTestModel extends CakeTestModel {
 class KcaptchaTestModel2 extends KcaptchaTestModel {
 	var $useTable = false;
 }
+
 
 class CaptchaComponentTestCase extends CakeTestCase {
 
@@ -124,15 +125,11 @@ class CaptchaComponentTestCase extends CakeTestCase {
 	}
 
 	public function testClearSession() {
-		$this->Component->startup($this->Controller);
-		$this->Controller->redirect('/');
-		$this->assertNull($this->Controller->Session->read($this->sessionKey));
-
 		$this->_loadController();
 		$this->Component->startup($this->Controller);
 		$result = $this->_render();
 		$this->assertNotNull($this->Controller->Session->read($this->sessionKey));
-		$this->Controller->render('/pages/home');
+		$this->Component->clearSession();
 		$this->assertNull($this->Controller->Session->read($this->sessionKey));
 	}
 
