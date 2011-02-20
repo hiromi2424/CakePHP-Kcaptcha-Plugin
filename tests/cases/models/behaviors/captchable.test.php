@@ -138,7 +138,6 @@ class CaptchableBehaviorTestCase extends CakeTestCase {
 		$this->assertTrue($this->Model->validCaptcha('ｈｏｇｅｈｏｇｅ'));
 		$this->assertTrue($this->Model->validCaptcha('　ｈｏｇｅｈｏｇｅ '));
 		$this->Model->setCaptchaAnswer('1h2o3g4e');
-		$this->assertTrue('　1ｈ2o３ｇ４e');
 		$this->assertTrue($this->Model->validCaptcha('　1ｈ2o３ｇ４e'));
 	}
 

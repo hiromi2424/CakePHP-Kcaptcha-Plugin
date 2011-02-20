@@ -24,7 +24,7 @@ Setup Captcha component to your controller:
 
 	<?php
 	
-	class PostController extends AppController {
+	class PostsController extends AppController {
 	
 		public $components = array(
 			'Kcaptcha.Captcha',
@@ -32,16 +32,59 @@ Setup Captcha component to your controller:
 	}
 
 
-Use Captcha helper(automatically set by the component) in your view:
+Use Captcha helper(automatically set by the component) in your form:
 
 	<?php
 		echo $this->Captcha->render();
 		echo $this->Form->input('captcha');
 	?>
 
-Simply that is all! Your Model will validate user's input for the captcha.
+Simply it's done! Your Post model will validate user's input for the captcha.
 
-for more options, you would see the test case.
+See following API reference for more options or any custom features.
+
+### API reference
+
+#### Captcha component
+
+Component's settings are:
+
+- `$sessionKey` - `string` session key for captcha. you should create the action for render if this was changed. default is `'Kcaptcha.answer'`.
+- `$model` - `string` name of a model to validate. default is controller's `$modelClass`.
+- `$setupHelper` - `boolean` whether the helper automatically added.
+- `$autoSetAnswer` - `boolean` whether the answer automatically set to the model.
+
+Component's methods:
+
+- `render()` - to render the captcha. this will output header and body for captcha image.
+- `clearSession()` - to clear the session data for answer of captcha. you don't need to call this but can use if you want to banish.
+
+#### Captchable behavior
+
+Behavior's settings are:
+
+- `$answerProperty` - `string` the model property that the answer is automatically set on. default is `'captchaAnswer'`.
+- `$field` - `string` the field to vlidate. default is `'captcha'`.
+- `$rule` - `string` the rule set name to validate. default is `'captcha'`.
+- `$convertKana` - `boolean` if `true`, multi-byte of user input will be converted to single-byte.
+- `$trim` - `boolean` whether user input will be trimmed.
+- `$required` - `boolean` whether the answer is required. you can also turn on or off with `requireCaptcha()`.
+- `$setupValidation` - `boolean` whether basic validation set for captcha is automatically set to your model.
+
+Behavior's methods:
+
+- `setupCaptchaValidation()` - to set basic validation set. see `$setupValidation` property.
+- `setCaptchaAnswer()` - to set the answer for captcha. used by Captcha component's `startup()`.
+- `requireCaptcha($yes = boolean)` - determine whether answer is required.
+- `validCaptcha($input)` - to validate the answer for captcha.
+
+#### Captcha helper
+
+There is only `render($url[optional])` method.
+
+This will show this plugin's `Captcha` controller's `render_captcha` action with `<img>` tag by default.
+
+You should specify the `$url` to your controller's action if you had to use `CaptchaComponent::render()` in the action.
 
 ## License
 
