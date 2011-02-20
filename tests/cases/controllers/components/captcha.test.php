@@ -87,6 +87,7 @@ class CaptchaComponentTestCase extends CakeTestCase {
 		$this->Component->startup($this->Controller);
 		$this->assertTrue($this->Model->Behaviors->attached('Captchable'));
 		$this->assertNull($this->Model->captchaAnswer);
+		$this->assertTrue(in_array('Kcaptcha.Captcha', $this->Controller->helpers));
 
 		$this->_loadController(array('autoSetAnswer' => false));
 		$this->Component->startup($this->Controller);

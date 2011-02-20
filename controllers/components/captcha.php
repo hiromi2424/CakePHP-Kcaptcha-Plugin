@@ -4,6 +4,7 @@ class CaptchaComponent extends Object {
 	var $components = array('Session');
 	var $sessionKey = 'Kcaptcha.answer';
 	var $model = null;
+	var $setupHelper = true;
 	var $autoSetAnswer = true;
 
 	function initialize(&$controller, $settings = array()) {
@@ -12,6 +13,9 @@ class CaptchaComponent extends Object {
 			if ($model = $controller->modelClass) {
 				$this->model = $controller->modelClass;
 			}
+		}
+		if ($this->setupHelper && !isset($controller->helpers['Kcaptcha.Captcha']) && !in_array('Kcaptcha.Captcha', $controller->helpers)) {
+			$controller->helpers[] = 'Kcaptcha.Captcha';
 		}
 	}
 
