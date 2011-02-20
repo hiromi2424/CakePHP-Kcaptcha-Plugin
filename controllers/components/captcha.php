@@ -25,10 +25,23 @@ class CaptchaComponent extends Object {
 		}
 	}
 
+	function beforeRender(&$controller) {
+		$this->clearSession();
+	}
+
+	function beforeRedirect(&$controller) {
+		$this->clearSession();
+	}
+
+	function clearSession() {
+		$this->Session->delete($this->sessionKey);
+	}
 
 	function render() { 
-		App::import('Vendor', 'Kcaptcha.Kcaptcha.Kcaptcha'); 
+		if (!App::import('Vendor', 'Kcaptcha' . DS . 'Kcaptcha')) {
+			App::import('Vendor', 'Kcaptcha.Kcaptcha' . DS . 'Kcaptcha');
+		}
 		$kcaptcha = new KCAPTCHA(); 
-		$this->Session->write($this->sessionKey, $kcaptcha->getKeyString()); 
+		$this->Session->write($this->sessionKey, $kcaptcha->getKeyString());
 	} 
 }
