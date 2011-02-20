@@ -19,12 +19,12 @@ or in current directory of your repository,
 
 ## Usage
 
-Setup Captcha component to your AppController:
+Setup Captcha component to your controller:
 
 
 	<?php
 	
-	class AppController extends Controller {
+	class PostController extends AppController {
 	
 		public $components = array(
 			'Kcaptcha.Captcha',
