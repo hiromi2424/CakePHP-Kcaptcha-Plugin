@@ -10,9 +10,9 @@ class CaptchaController extends KcaptchaAppController {
 			$this->Auth->allow('render_captcha');
 		}
 	}
-	
+
 	function render_captcha() {
 		$this->Captcha->render();
-		exit;
+		$this->_stop();
 	}
 }
