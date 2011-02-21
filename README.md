@@ -9,13 +9,15 @@ CakePHP >= 1.3
 
 ## Installation
 
-in your plugins directory,
+In your plugins directory,
 
 	git clone git://github.com/hiromi2424/CakePHP-Kcaptcha-Plugin.git kcaptcha
 
-or in current directory of your repository,
+Or in current directory of your repository,
 
 	git submodule add git://github.com/hiromi2424/CakePHP-Kcaptcha-Plugin.git plugins/kcaptcha
+
+If you want to use your kcaptcha library(maybe for your config file), put the files into `vendors/kcaptcha`.
 
 ## Usage
 
@@ -51,8 +53,8 @@ Component's settings are:
 
 - `$sessionKey` - `string` session key for captcha. you should create the action for render if this was changed. default is `'Kcaptcha.answer'`.
 - `$model` - `string` name of a model to validate. default is controller's `$modelClass`.
-- `$setupHelper` - `boolean` whether the helper automatically added.
-- `$autoSetAnswer` - `boolean` whether the answer automatically set to the model.
+- `$setupHelper` - `boolean` whether the helper automatically added. default is `true`.
+- `$autoSetAnswer` - `boolean` whether the answer automatically set to the model. default is `true`.
 
 Component's methods:
 
@@ -66,10 +68,10 @@ Behavior's settings are:
 - `$answerProperty` - `string` the model property that the answer is automatically set on. default is `'captchaAnswer'`.
 - `$field` - `string` the field to vlidate. default is `'captcha'`.
 - `$rule` - `string` the rule set name to validate. default is `'captcha'`.
-- `$convertKana` - `boolean` if `true`, multi-byte of user input will be converted to single-byte.
-- `$trim` - `boolean` whether user input will be trimmed.
-- `$required` - `boolean` whether the answer is required. you can also turn on or off with `requireCaptcha()`.
-- `$setupValidation` - `boolean` whether basic validation set for captcha is automatically set to your model.
+- `$convertKana` - `boolean` if `true`, multi-byte of user input will be converted to single-byte. default is `true`.
+- `$trim` - `mixed` whether user input will be trimmed, otherwise regexp of spaces. default is regexp that multi-byte spaces(PCRE).
+- `$required` - `boolean` whether the answer is required. you can also turn on or off with `requireCaptcha()`. default is `true`.
+- `$setupValidation` - `boolean` whether basic validation set for captcha is automatically set to your model. default is `true`.
 
 Behavior's methods:
 
