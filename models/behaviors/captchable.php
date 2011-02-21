@@ -30,9 +30,10 @@ class CaptchableBehavior extends ModelBehavior {
 		if (!isset($model->validate[$field][$rule])) {
 			$model->validate[$field][$rule] = array();
 		}
-		$model->validate[$field][$rule] = Set::merge($model->validate[$field][$rule], array(
+		$model->validate[$field][$rule] = array_merge(array(
 			'rule' => array('validCaptcha'),
-		));
+			'message' => __d('kcaptcha', 'Not same as shown captcha', true),
+		), $model->validate[$field][$rule]);
 
 		$this->requireCaptcha($model, $this->settings[$model->alias]['required']);
 	}

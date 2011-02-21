@@ -27,6 +27,7 @@ class CaptchableBehaviorTestCase extends CakeTestCase {
 			'captcha' => array(
 				'captcha' => array(
 					'rule' => array('validCaptcha'),
+					'message' => __d('kcaptcha', 'Not same as shown captcha', true),
 					'required' => true,
 					'allowEmpty' => false,
 				),
@@ -60,6 +61,7 @@ class CaptchableBehaviorTestCase extends CakeTestCase {
 				'captcha' => array(
 					'on' => 'update',
 					'rule' => array('validCaptcha'),
+					'message' => __d('kcaptcha', 'Not same as shown captcha', true),
 					'required' => true,
 					'allowEmpty' => false,
 				),
@@ -89,6 +91,7 @@ class CaptchableBehaviorTestCase extends CakeTestCase {
 				),
 				'captcha' => array(
 					'rule' => array('validCaptcha'),
+					'message' => __d('kcaptcha', 'Not same as shown captcha', true),
 					'required' => true,
 					'allowEmpty' => false,
 				),
