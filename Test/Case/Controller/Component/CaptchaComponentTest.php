@@ -1,56 +1,58 @@
 <?php
 
+App::uses('Controller', 'Controller');
+
 class KcaptchaTestController extends Controller {
-	 var $components = array(
+	 public $components = array(
 	 	'Kcaptcha.Captcha' => array(),
 	 	'Session',
 	 );
-	 var $uses = array('KcaptchaTestModel');
+	 public $uses = array('KcaptchaTestModel');
 
-	function header() {
+	public function header() {
 	}
 
-	function _stop() {
+	protected function _stop() {
 	}
 
 }
 
 class KcaptchaTestModel extends CakeTestModel {
-	var $useTable = false;
+	public $useTable = false;
 }
 
 class KcaptchaTestModel2 extends KcaptchaTestModel {
-	var $useTable = false;
+	public $useTable = false;
 }
 
 
 class CaptchaComponentTestCase extends CakeTestCase {
 
-	var $Controller;
-	var $Component;
-	var $Model;
+	public $Controller;
+	public $Component;
+	public $Model;
 
-	var $sessionKey = 'KcaptchaTest.answer';
+	public $sessionKey = 'KcaptchaTest.answer';
 
-	function startTest($method = null) {
+	public function startTest($method = null) {
 		$this->_loadController();
 		parent::startTest($method);
 	}
 
-	function endTest() {
+	public function endTest() {
 		$this->_loadController();
 		$this->Controller->Session->delete($this->sessionKey);
 		$this->_reset();
 	}
 
-	function _reset() {
+	protected function _reset() {
 		unset($this->Controller);
 		unset($this->Component);
 		unset($this->Model);
 		ClassRegistry::flush();
 	}
 
-	function _loadController($componentSettings = array(), $initialize = true) {
+	protected function _loadController($componentSettings = array(), $initialize = true) {
 		$this->_reset();
 
 		$this->Controller = new KcaptchaTestController;
@@ -65,7 +67,7 @@ class CaptchaComponentTestCase extends CakeTestCase {
 		}
 	}
 
-	function _render() {
+	protected function _render() {
 		ob_start();
 		$this->Component->render();
 		$result = ob_get_contents();
@@ -74,7 +76,7 @@ class CaptchaComponentTestCase extends CakeTestCase {
 		return $result;
 	}
 
-	function _initializeController() {
+	protected function _initializeController() {
 		$this->Controller->constructClasses();
 		$this->Controller->Component->initialize($this->Controller);
 		$this->Component =& $this->Controller->Captcha;
@@ -83,7 +85,7 @@ class CaptchaComponentTestCase extends CakeTestCase {
 		}
 	}
 
-	function testStartup() {
+	public function testStartup() {
 		$this->Component->startup($this->Controller);
 		$this->assertTrue($this->Model->Behaviors->attached('Captchable'));
 		$this->assertNull($this->Model->captchaAnswer);
@@ -112,7 +114,7 @@ class CaptchaComponentTestCase extends CakeTestCase {
 		$this->assertFalse(isset($this->Model->captchaAnswer));
 	}
 
-	function testRender() {
+	public function testRender() {
 		$this->Component->startup($this->Controller);
 		$result = $this->_render();
 		$this->assertFalse(empty($result));

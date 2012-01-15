@@ -1,13 +1,13 @@
 <?php
 
 class CaptchaComponent extends Object {
-	var $components = array('Session');
-	var $sessionKey = 'Kcaptcha.answer';
-	var $model = null;
-	var $setupHelper = true;
-	var $autoSetAnswer = true;
+	public $components = array('Session');
+	public $sessionKey = 'Kcaptcha.answer';
+	public $model = null;
+	public $setupHelper = true;
+	public $autoSetAnswer = true;
 
-	function initialize(&$controller, $settings = array()) {
+	public function initialize(&$controller, $settings = array()) {
 		$this->_set($settings);
 		if ($this->model === null) {
 			if ($model = $controller->modelClass) {
@@ -19,7 +19,7 @@ class CaptchaComponent extends Object {
 		}
 	}
 
-	function startup(&$controller) {
+	public function startup(&$controller) {
 		if ($this->model !== null && $this->autoSetAnswer) {
 			$model =& ClassRegistry::init($this->model);
 			if (!$model->Behaviors->attached('Kcaptcha.Captchable')) {
@@ -29,11 +29,11 @@ class CaptchaComponent extends Object {
 		}
 	}
 
-	function clearSession() {
+	public function clearSession() {
 		$this->Session->delete($this->sessionKey);
 	}
 
-	function render() { 
+	public function render() { 
 		if (!App::import('Vendor', 'Kcaptcha' . DS . 'Kcaptcha')) {
 			App::import('Vendor', 'Kcaptcha.Kcaptcha' . DS . 'Kcaptcha');
 		}

@@ -4,10 +4,10 @@ App::import('Controller', 'Kcaptcha.Captcha');
 
 class TestCaptchaController extends CaptchaController {
 
-	function header() {
+	public function header() {
 	}
 
-	function _stop() {
+	protected function _stop() {
 	}
 
 }
@@ -15,18 +15,18 @@ class TestCaptchaController extends CaptchaController {
 
 class CaptchaControllerTestCase extends CakeTestCase {
 
-	function startTest() {
+	public function startTest() {
 		$this->Controller = new TestCaptchaController;
 		$this->Controller->params['action'] = 'render_captcha';
 	}
 
-	function endTest() {
+	public function endTest() {
 		$this->Controller->Captcha->Session->delete('Kcaptcha.answer');
 		unset($this->Controller);
 		ClassRegistry::flush();
 	}
 
-	function _render() {
+	protected function _render() {
 		ob_start();
 		$this->Controller->render_captcha();
 		$result = ob_get_contents();
@@ -35,7 +35,7 @@ class CaptchaControllerTestCase extends CakeTestCase {
 		return $result;
 	}
 
-	function testRenderCaptcha() {
+	public function testRenderCaptcha() {
 		$this->Controller->constructClasses();
 		$this->Controller->Component->initialize($this->Controller);
 		$this->Controller->beforeFilter();
@@ -46,7 +46,7 @@ class CaptchaControllerTestCase extends CakeTestCase {
 		$this->assertFalse(empty($sessionData));
 	}
 
-	function testRenderCaptchaWithAuth() {
+	public function testRenderCaptchaWithAuth() {
 		$this->Controller->components[] = 'Auth';
 		$this->Controller->constructClasses();
 		$this->Controller->Component->initialize($this->Controller);

@@ -2,9 +2,9 @@
 
 class CaptchableBehavior extends ModelBehavior {
 
-	var $settings = array();
+	public $settings = array();
 
-	var $defaultOptions = array(
+	public $defaultOptions = array(
 		'answerProperty' => 'captchaAnswer',
 		'field' => 'captcha',
 		'rule' => 'captcha',
@@ -14,16 +14,16 @@ class CaptchableBehavior extends ModelBehavior {
 		'setupValidation' => true,
 	);
 
-	var $answer;
+	public $answer;
 
-	function setup(&$model, $config = array()) {
+	public function setup(&$model, $config = array()) {
 		$this->settings[$model->alias] = array_merge($this->defaultOptions, $config);
 		if ($this->settings[$model->alias]['setupValidation']) {
 			$this->setupCaptchaValidation($model);
 		}
 	}
 
-	function setupCaptchaValidation(&$model) {
+	public function setupCaptchaValidation(&$model) {
 		$field = $this->settings[$model->alias]['field'];
 		$rule = $this->settings[$model->alias]['rule'];
 
@@ -38,11 +38,11 @@ class CaptchableBehavior extends ModelBehavior {
 		$this->requireCaptcha($model, $this->settings[$model->alias]['required']);
 	}
 
-	function setCaptchaAnswer(&$model, $answer) {
+	public function setCaptchaAnswer(&$model, $answer) {
 		$model->{$this->settings[$model->alias]['answerProperty']} = $answer;
 	}
 
-	function requireCaptcha(&$model, $yes = true) {
+	public function requireCaptcha(&$model, $yes = true) {
 		$field = $this->settings[$model->alias]['field'];
 		$rule = $this->settings[$model->alias]['rule'];
 
@@ -50,7 +50,7 @@ class CaptchableBehavior extends ModelBehavior {
 		$model->validate[$field][$rule]['allowEmpty'] = !$yes;
 	}
 
-	function validCaptcha(&$model, $data) {
+	public function validCaptcha(&$model, $data) {
 		$check = current((array)$data);
 		if ($this->settings[$model->alias]['convertKana']) {
 			$check = mb_convert_kana($check, 'a');
@@ -65,7 +65,7 @@ class CaptchableBehavior extends ModelBehavior {
 		return $check === $model->{$this->settings[$model->alias]['answerProperty']};
 	}
 
-	function _multibyteTrim($check, $space) {
+	protected function _multibyteTrim($check, $space) {
 		$space = $space === true ? $this->defaultOptions['trim'] : $space;
 		return preg_replace("/(^$space+|$space+$)/mu", '', $check);
 	}
