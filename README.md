@@ -34,11 +34,14 @@ Setup Captcha component to your controller:
 	}
 
 
-Use Captcha helper(automatically set by the component) in your form:
+Use Captcha helper(automatically set by the component) in your form. For example:
 
 	<?php
+		echo $this->Form->create('Post');
+		echo $this->Form->input('body');
 		echo $this->Captcha->render();
 		echo $this->Form->input('captcha');
+		echo $this->Form->end('Submit');
 	?>
 
 Simply it's done! Your Post model will validate user's input for the captcha.
