@@ -16,14 +16,14 @@ class CaptchableBehavior extends ModelBehavior {
 
 	public $answer;
 
-	public function setup(&$model, $config = array()) {
+	public function setup($model, $config = array()) {
 		$this->settings[$model->alias] = array_merge($this->defaultOptions, $config);
 		if ($this->settings[$model->alias]['setupValidation']) {
 			$this->setupCaptchaValidation($model);
 		}
 	}
 
-	public function setupCaptchaValidation(&$model) {
+	public function setupCaptchaValidation($model) {
 		$field = $this->settings[$model->alias]['field'];
 		$rule = $this->settings[$model->alias]['rule'];
 
@@ -38,11 +38,11 @@ class CaptchableBehavior extends ModelBehavior {
 		$this->requireCaptcha($model, $this->settings[$model->alias]['required']);
 	}
 
-	public function setCaptchaAnswer(&$model, $answer) {
+	public function setCaptchaAnswer($model, $answer) {
 		$model->{$this->settings[$model->alias]['answerProperty']} = $answer;
 	}
 
-	public function requireCaptcha(&$model, $yes = true) {
+	public function requireCaptcha($model, $yes = true) {
 		$field = $this->settings[$model->alias]['field'];
 		$rule = $this->settings[$model->alias]['rule'];
 
@@ -50,7 +50,7 @@ class CaptchableBehavior extends ModelBehavior {
 		$model->validate[$field][$rule]['allowEmpty'] = !$yes;
 	}
 
-	public function validCaptcha(&$model, $data) {
+	public function validCaptcha($model, $data) {
 		$check = current((array)$data);
 		if ($this->settings[$model->alias]['convertKana']) {
 			$check = mb_convert_kana($check, 'a');

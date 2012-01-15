@@ -7,7 +7,7 @@ class CaptchableBehaviorMockModel extends CakeTestModel {
 
 class CaptchableBehaviorTestCase extends CakeTestCase {
 	public function startTest() {
-		$this->Model =& ClassRegistry::init('CaptchableBehaviorMockModel');
+		$this->Model = ClassRegistry::init('CaptchableBehaviorMockModel');
 		$this->Model->Behaviors->attach('Kcaptcha.Captchable');
 	}
 
@@ -18,7 +18,7 @@ class CaptchableBehaviorTestCase extends CakeTestCase {
 
 	protected function _reset($config = array()) {
 		$this->endTest();
-		$this->Model =& ClassRegistry::init('CaptchableBehaviorMockModel');
+		$this->Model = ClassRegistry::init('CaptchableBehaviorMockModel');
 		$this->Model->Behaviors->attach('Kcaptcha.Captchable', $config);
 	}
 

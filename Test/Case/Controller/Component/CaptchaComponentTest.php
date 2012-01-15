@@ -79,9 +79,9 @@ class CaptchaComponentTestCase extends CakeTestCase {
 	protected function _initializeController() {
 		$this->Controller->constructClasses();
 		$this->Controller->Component->initialize($this->Controller);
-		$this->Component =& $this->Controller->Captcha;
+		$this->Component = $this->Controller->Captcha;
 		if ($this->Component->model !== null) {
-			$this->Model =& ClassRegistry::init($this->Component->model);
+			$this->Model = ClassRegistry::init($this->Component->model);
 		}
 	}
 

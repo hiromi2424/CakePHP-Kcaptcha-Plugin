@@ -7,7 +7,7 @@ class CaptchaComponent extends Object {
 	public $setupHelper = true;
 	public $autoSetAnswer = true;
 
-	public function initialize(&$controller, $settings = array()) {
+	public function initialize($controller, $settings = array()) {
 		$this->_set($settings);
 		if ($this->model === null) {
 			if ($model = $controller->modelClass) {
@@ -19,9 +19,9 @@ class CaptchaComponent extends Object {
 		}
 	}
 
-	public function startup(&$controller) {
+	public function startup($controller) {
 		if ($this->model !== null && $this->autoSetAnswer) {
-			$model =& ClassRegistry::init($this->model);
+			$model = ClassRegistry::init($this->model);
 			if (!$model->Behaviors->attached('Kcaptcha.Captchable')) {
 				$model->Behaviors->attach('Kcaptcha.Captchable');
 			}
