@@ -17,7 +17,7 @@ class CaptchaControllerTestCase extends CakeTestCase {
 
 	public function startTest() {
 		$this->Controller = new TestCaptchaController;
-		$this->Controller->params['action'] = 'render_captcha';
+		$this->Controller->request->params['action'] = 'render_captcha';
 	}
 
 	public function endTest() {

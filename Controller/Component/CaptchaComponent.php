@@ -22,7 +22,7 @@ class CaptchaComponent extends Component {
 		if ($this->model !== null && $this->autoSetAnswer) {
 			$model = ClassRegistry::init($this->model);
 			if (!$model->Behaviors->attached('Kcaptcha.Captchable')) {
-				$model->Behaviors->attach('Kcaptcha.Captchable');
+				$model->Behaviors->load('Kcaptcha.Captchable');
 			}
 			$model->setCaptchaAnswer($this->Session->read($this->sessionKey));
 		}
