@@ -37,9 +37,7 @@ class CaptchaControllerTestCase extends CakeTestCase {
 
 	public function testRenderCaptcha() {
 		$this->Controller->constructClasses();
-		$this->Controller->Component->initialize($this->Controller);
-		$this->Controller->beforeFilter();
-		$this->Controller->Component->startup($this->Controller);
+		$this->Controller->startupProcess();
 		$result = $this->_render();
 		$this->assertFalse(empty($result));
 		$sessionData = $this->Controller->Captcha->Session->read('Kcaptcha.answer');
@@ -49,9 +47,7 @@ class CaptchaControllerTestCase extends CakeTestCase {
 	public function testRenderCaptchaWithAuth() {
 		$this->Controller->components[] = 'Auth';
 		$this->Controller->constructClasses();
-		$this->Controller->Component->initialize($this->Controller);
-		$this->Controller->beforeFilter();
-		$this->Controller->Component->startup($this->Controller);
+		$this->Controller->startupProcess();
 		$result = $this->_render();
 		$this->assertFalse(empty($result));
 		$sessionData = $this->Controller->Captcha->Session->read('Kcaptcha.answer');

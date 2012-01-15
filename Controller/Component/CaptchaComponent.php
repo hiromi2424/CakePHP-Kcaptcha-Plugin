@@ -1,14 +1,13 @@
 <?php
 
-class CaptchaComponent extends Object {
+class CaptchaComponent extends Component {
 	public $components = array('Session');
 	public $sessionKey = 'Kcaptcha.answer';
 	public $model = null;
 	public $setupHelper = true;
 	public $autoSetAnswer = true;
 
-	public function initialize($controller, $settings = array()) {
-		$this->_set($settings);
+	public function initialize($controller) {
 		if ($this->model === null) {
 			if ($model = $controller->modelClass) {
 				$this->model = $controller->modelClass;

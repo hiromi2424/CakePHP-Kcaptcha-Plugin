@@ -1,11 +1,14 @@
 <?php
 
-App::import('Helper', 'Kcaptcha.Captcha');
+App::uses('Controller', 'Controller');
+App::uses('View', 'View');
+App::uses('AppHelper', 'View/Helper');
+App::uses('CaptchaHelper', 'Kcaptcha.View/Helper');
 
 class CaptchaHelperTestCase extends CakeTestCase {
 
 	public function startTest() {
-		$this->Helper = new CaptchaHelper;
+		$this->Helper = new CaptchaHelper(new View(new Controller));
 	}
 
 	public function endTest() {
